@@ -1,13 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Categories from './Categories';
+import Clue from './Clue';
 
-const Gameboard = props => {
+const Gameboard = ({ selectQuestion, currentQuestion, categories, answeredQuestions, answeredQuestion}) => {
   return (
-    <div data-testid="gameboard" id={props.currentQuestion.question ? 'question' : 'gameboard'}>
-      {/* was a question clicked?  */}
-      {/* Yes? Show clue */}
-      {/* No? Show Categories */}
-    </div>
+    <>
+      {Object.keys(currentQuestion).length ? (<Clue selected = {true}
+                                                    selectQuestion = {selectQuestion}
+                                                    answeredQuestion ={answeredQuestion}
+                                                    answered = {false}
+                                                    clue = {currentQuestion}
+                                                    />
+                                                    ) : (
+      <div data-testid="gameboard" id={currentQuestion.question ? 'question' : 'gameboard'}>
+        <Categories selectQuestion= {selectQuestion} 
+                    currentQuestion= {currentQuestion} 
+                    answeredQuestion ={answeredQuestion}
+                    categories= {categories} 
+                    answeredQuestions = {answeredQuestions} 
+                    />
+      </div>
+      )}
+    </>
   );
 };
 
